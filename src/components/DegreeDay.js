@@ -6,7 +6,8 @@ class DegreeDay extends Component {
     this.state = { 
       region: 'austria',
       to: '',
-      from: ''
+      from: '',
+      apiResponse: []
     };
   }
 
@@ -17,20 +18,46 @@ class DegreeDay extends Component {
 
 
   handleSubmit = (event) => {
-    alert('A form was submitted: ' + this.state);
+    // alert('A form was submitted: ' + this.state);
+
+    // fetch('http://localhost:8080/api/v1/degreeDay/get', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(this.state)
+    // }).then(function(response) {
+    //     console.log(response)
+    //     return response.json();
+    //   });
+
 
     fetch('http://localhost:8080/api/v1/degreeDay/get', {
         method: 'POST',
         // We convert the React state to JSON and send it as the POST body
-        body: JSON.stringify(this.state),
-        config: {
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      }
+        // body: JSON.stringify(this.state),
+        body: JSON.stringify({
+          from: this.state.from,
+          to: this.state.to,
+          region: this.state.region
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }).then(function(response) {
         console.log(response)
+        
         return response.json();
+      }).then(body => {
+        var temp = [];
+        body.map(x => {
+          temp.push(x)
+        });
+
+        this.setState({
+          apiResponse: temp})
+
       });
 
     event.preventDefault();
@@ -57,6 +84,7 @@ class DegreeDay extends Component {
         </label>
         <input type="submit" value="Submit" />
       </form>
+        {this.state.apiResponse}
         </div>
     );
   }
