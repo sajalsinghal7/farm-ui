@@ -50,13 +50,18 @@ class DegreeDay extends Component {
         
         return response.json();
       }).then(body => {
-        var temp = [];
-        body.map(x => {
-          temp.push(x)
+        // var temp = [];
+        // body.map(x => {
+        //   temp.push(x)
+        // });
+
+        // this.state.apiResponse = temp;
+        // this.setState({
+        //   apiResponse: temp.map(resp => resp)})
+        this.setState({
+          apiResponse: body
         });
 
-        this.setState({
-          apiResponse: temp})
 
       });
 
@@ -84,7 +89,34 @@ class DegreeDay extends Component {
         </label>
         <input type="submit" value="Submit" />
       </form>
-        {this.state.apiResponse}
+      <div>
+        {/* {JSON.stringify(this.state.apiResponse)} */}
+      </div>
+      <div>
+      <table>
+        {/* <th>
+          <td>id</td>
+          <td>date</td>
+          <td>region</td>
+          <td>tMin</td>
+          <td>tMax</td>
+          <td>tMedium</td>
+          <td>precipitation</td>
+          <td>degreeDay</td>
+        </th> */}
+        {this.state.apiResponse.map((item =>
+        <tr key={item.id}>
+        <td>{item.id}</td>
+        <td>{item.date}</td>
+        <td>{item.region}</td>
+        <td>{item.tMin}</td>
+        <td>{item.tMax}</td>
+        <td>{item.tMedium}</td>
+        <td>{item.precipitation}</td>
+        <td>{item.degreeDay}</td></tr>
+        ))}
+</table>
+      </div>
         </div>
     );
   }
