@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import MaterialTable from 'material-table'
 class DegreeDay extends Component {
   constructor(props) {
     super(props);
@@ -92,30 +92,36 @@ class DegreeDay extends Component {
       <div>
         {/* {JSON.stringify(this.state.apiResponse)} */}
       </div>
-      <div>
-      <table>
-        {/* <th>
-          <td>id</td>
-          <td>date</td>
-          <td>region</td>
-          <td>tMin</td>
-          <td>tMax</td>
-          <td>tMedium</td>
-          <td>precipitation</td>
-          <td>degreeDay</td>
-        </th> */}
-        {this.state.apiResponse.map((item =>
-        <tr key={item.id}>
-        <td>{item.id}</td>
-        <td>{item.date}</td>
-        <td>{item.region}</td>
-        <td>{item.tMin}</td>
-        <td>{item.tMax}</td>
-        <td>{item.tMedium}</td>
-        <td>{item.precipitation}</td>
-        <td>{item.degreeDay}</td></tr>
-        ))}
-</table>
+      {/* <div>
+        <table style={{"borderWidth":"1px", 'borderColor':"#aaaaaa", 'borderStyle':'solid'}}>
+          {this.state.apiResponse.map((item =>
+          <tr key={item.id}>
+          <td>{item.id}</td>
+          <td>{item.date}</td>
+          <td>{item.region}</td>
+          <td>{item.tMin}</td>
+          <td>{item.tMax}</td>
+          <td>{item.tMedium}</td>
+          <td>{item.precipitation}</td>
+          <td>{item.degreeDay}</td></tr>
+          ))}
+        </table>
+      </div> */}
+      <div style={{ maxWidth: '100%' }}>
+        <MaterialTable
+          columns={[
+            { title: 'Id', field: 'id' },
+            { title: 'Date', field: 'date' },
+            { title: 'Region', field: 'region' },
+            { title: 'T Max', field: 'tMax' },
+            { title: 'T Min', field: 'tMin' },
+            { title: 'tMedium', field: 'tMedium' },
+            { title: 'Precipitation', field: 'precipitation' },
+            { title: 'degreeDay', field: 'degreeDay' }
+          ]}
+          data={this.state.apiResponse}
+          title="DegreeDay"
+        />
       </div>
         </div>
     );
