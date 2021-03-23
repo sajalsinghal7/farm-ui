@@ -4,7 +4,7 @@ class DegreeDay extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      region: 'austria',
+      region: 'austria'.toUpperCase(),
       to: new Date(),
       from: new Date(),
       degreeDayFrom: '',

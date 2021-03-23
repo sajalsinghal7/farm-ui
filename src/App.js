@@ -4,6 +4,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
 import DegreeDay from './components/DegreeDay';
+import UploadDegreeDay from './components/UploadDegreeDay';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
             <li><Link to={'/contact'} className="nav-link">Contact</Link></li>
             <li><Link to={'/about'} className="nav-link">About</Link></li>
             <li><Link to={'/degreeDay'} className="nav-link">Degree Day</Link></li>
+            <li><Link to={'/uploadDegreeDay'} className="nav-link">Upload Degree Day File Records</Link></li>
           </ul>
           </nav>
           <hr />
@@ -25,6 +27,7 @@ class App extends Component {
               <Route path='/contact' component={Contact} />
               <Route path='/about' component={About} />
               <Route path='/degreeDay' component={DegreeDay} />
+              <Route path='/uploadDegreeDay' component={UploadDegreeDay} />
           </Switch>
         </div>
       </Router>
