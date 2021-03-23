@@ -5,8 +5,11 @@ class DegreeDay extends Component {
     super(props);
     this.state = { 
       region: 'austria',
-      to: '',
-      from: '',
+      to: new Date(),
+      from: new Date(),
+      degreeDayFrom: '',
+      degreeDayTo: '',
+      accumulatedDegreeDay: 0,
       apiResponse: []
     };
   }
@@ -16,21 +19,32 @@ class DegreeDay extends Component {
     this.setState({[event.target.name]: event.target.value});
   }
 
+  calculateAccumulatedDegreeDay = (event) => {
+    this.setState({[event.target.name]: event.target.value});
+    var from = this.state.degreeDayFrom;
+    var to = this.state.degreeDayTo;
+    if(from !== '') {
+      from = from.replace('-', '').replace('-', '');
+      from = parseInt(from)
+    }
+    if(to !== '') {
+      to = to.replace('-', '').replace('-', '');
+      to = parseInt(to)
+    }
+    if(from !== '' && to !== '') {
+      var accumulatedResult = 0;
+      this.state.apiResponse.map(item => {
+        if(item.date >= from && item.date <= to) {
+          accumulatedResult += item.degreeDay;
+        }
+        return accumulatedResult;
+      });
+      this.setState({accumulatedDegreeDay: accumulatedResult});
+    }
+    event.preventDefault();
+  }
 
   handleSubmit = (event) => {
-    // alert('A form was submitted: ' + this.state);
-
-    // fetch('http://localhost:8080/api/v1/degreeDay/get', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(this.state)
-    // }).then(function(response) {
-    //     console.log(response)
-    //     return response.json();
-    //   });
 
 
     fetch('http://localhost:8080/api/v1/degreeDay/get', {
@@ -50,14 +64,6 @@ class DegreeDay extends Component {
         
         return response.json();
       }).then(body => {
-        // var temp = [];
-        // body.map(x => {
-        //   temp.push(x)
-        // });
-
-        // this.state.apiResponse = temp;
-        // this.setState({
-        //   apiResponse: temp.map(resp => resp)})
         this.setState({
           apiResponse: body
         });
@@ -79,35 +85,29 @@ class DegreeDay extends Component {
           Name:
           <input type="text" value={this.state.region} name="regionOfAnalysis" onChange={this.handleChange} />
         </label>
-        <label>
-          From Date:
-          <input type="Date" value={this.state.from} name="startDate" onChange={this.handleChange} />
-        </label>
-        <label>
-          to Date:
-          <input type="Date" value={this.state.to} name="endDate" onChange={this.handleChange} />
-        </label>
+
         <input type="submit" value="Submit" />
       </form>
+
+      <form onSubmit={this.calculateAccumulatedDegreeDay}>
+        <div>
+          <label>
+            From Date:
+            <input type="Date" value={this.state.degreeDayFrom} name="degreeDayFrom" onChange={this.calculateAccumulatedDegreeDay} />
+          </label>
+          <label>
+            to Date:
+            <input type="Date" value={this.state.degreeDayTo} name="degreeDayTo" onChange={this.calculateAccumulatedDegreeDay} />
+          </label>
+          
+        <input type="submit" value="Calculate Accumulated Degree Day" />
+        </div>
+      </form>
       <div>
-        {/* {JSON.stringify(this.state.apiResponse)} */}
+        {this.state.accumulatedDegreeDay}
       </div>
-      {/* <div>
-        <table style={{"borderWidth":"1px", 'borderColor':"#aaaaaa", 'borderStyle':'solid'}}>
-          {this.state.apiResponse.map((item =>
-          <tr key={item.id}>
-          <td>{item.id}</td>
-          <td>{item.date}</td>
-          <td>{item.region}</td>
-          <td>{item.tMin}</td>
-          <td>{item.tMax}</td>
-          <td>{item.tMedium}</td>
-          <td>{item.precipitation}</td>
-          <td>{item.degreeDay}</td></tr>
-          ))}
-        </table>
-      </div> */}
-      <div style={{ maxWidth: '100%' }}>
+
+      <div style={{ maxWidth: '90%' }}>
         <MaterialTable
           columns={[
             { title: 'Id', field: 'id' },
@@ -120,7 +120,7 @@ class DegreeDay extends Component {
             { title: 'degreeDay', field: 'degreeDay' }
           ]}
           data={this.state.apiResponse}
-          title="DegreeDay"
+          title="Degree Day Table"
         />
       </div>
         </div>
