@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MaterialTable from 'material-table'
+
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 class DegreeDay extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,78 @@ class DegreeDay extends Component {
       degreeDayFrom: '',
       degreeDayTo: '',
       accumulatedDegreeDay: 0,
-      apiResponse: []
+      apiResponse: [
+        {
+          id: 1,
+          region: "Austria",
+          date: 20210101,
+          tMax: 11,
+          tMin: 10,
+          tMedium: 10,
+          precipitation: 50,
+          degreeDay: 14
+        },
+        {
+          id: 2,
+          region: "Austria",
+          date: 20210102,
+          tMax: 1,
+          tMin: 0,
+          tMedium: 0,
+          precipitation: 50,
+          degreeDay: 0
+        },
+        {
+          id: 3,
+          region: "Austria",
+          date: 20210103,
+          tMax: 11,
+          tMin: 10,
+          tMedium: 10,
+          precipitation: 51,
+          degreeDay: 16
+        },
+        {
+          id: 4,
+          region: "Austria",
+          date: 20210104,
+          tMax: 11,
+          tMin: 10,
+          tMedium: 10,
+          precipitation: 50,
+          degreeDay: 13
+        },
+        {
+          id: 5,
+          region: "Austria",
+          date: 20210105,
+          tMax: 11,
+          tMin: 10,
+          tMedium: 10,
+          precipitation: 50,
+          degreeDay: 16
+        },
+        {
+          id: 6,
+          region: "Austria",
+          date: 20210106,
+          tMax: 11,
+          tMin: 10,
+          tMedium: 10,
+          precipitation: 50,
+          degreeDay: 0
+        },
+        {
+          id: 7,
+          region: "Austria",
+          date: 20210107,
+          tMax: 11,
+          tMin: 10,
+          tMedium: 10,
+          precipitation: 50,
+          degreeDay: 14
+        }
+      ]
     };
   }
 
@@ -107,7 +180,28 @@ class DegreeDay extends Component {
         {this.state.accumulatedDegreeDay}
       </div>
 
-      <div style={{ maxWidth: '90%' }}>
+        <LineChart
+          width={500}
+          height={300}
+          data={this.state.apiResponse}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="tMax" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="tMin" stroke="#aaaaaa" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="degreeDay" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="tMedium" stroke="#82ca9d" />
+        </LineChart>
+      <div style={{ maxWidth: '50%' }}>
         <MaterialTable
           columns={[
             { title: 'Id', field: 'id' },
@@ -123,6 +217,7 @@ class DegreeDay extends Component {
           title="Degree Day Table"
         />
       </div>
+     
         </div>
     );
   }
