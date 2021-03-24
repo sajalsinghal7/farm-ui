@@ -29,8 +29,8 @@ class UploadDegreeDay extends Component {
         // We convert the React state to JSON and send it as the POST body
         // body: JSON.stringify(this.state),
         body: JSON.stringify({
-          from: this.state.path,
-          to: this.state.delimitter,
+          path: this.state.path,
+          delimitter: this.state.delimitter,
           region: this.state.region
         }),
         headers: {
