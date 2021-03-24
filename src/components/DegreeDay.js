@@ -13,78 +13,7 @@ class DegreeDay extends Component {
       degreeDayTo: '',
       accumulatedDegreeDay: 0,
       accumulatedDegreeDayGraphData: [],
-      apiResponse: [
-        {
-          id: 1,
-          region: "Austria",
-          date: 20210101,
-          tMax: 11,
-          tMin: 10,
-          tMedium: 10,
-          precipitation: 50,
-          degreeDay: 14
-        },
-        {
-          id: 2,
-          region: "Austria",
-          date: 20210102,
-          tMax: 1,
-          tMin: 0,
-          tMedium: 0,
-          precipitation: 50,
-          degreeDay: 0
-        },
-        {
-          id: 3,
-          region: "Austria",
-          date: 20210103,
-          tMax: 11,
-          tMin: 10,
-          tMedium: 10,
-          precipitation: 51,
-          degreeDay: 16
-        },
-        {
-          id: 4,
-          region: "Austria",
-          date: 20210104,
-          tMax: 11,
-          tMin: 10,
-          tMedium: 10,
-          precipitation: 50,
-          degreeDay: 13
-        },
-        {
-          id: 5,
-          region: "Austria",
-          date: 20210105,
-          tMax: 11,
-          tMin: 10,
-          tMedium: 10,
-          precipitation: 50,
-          degreeDay: 16
-        },
-        {
-          id: 6,
-          region: "Austria",
-          date: 20210106,
-          tMax: 11,
-          tMin: 10,
-          tMedium: 10,
-          precipitation: 50,
-          degreeDay: 0
-        },
-        {
-          id: 7,
-          region: "Austria",
-          date: 20210107,
-          tMax: 11,
-          tMin: 10,
-          tMedium: 10,
-          precipitation: 50,
-          degreeDay: 14
-        }
-      ]
+      apiResponse: []
     };
   }
 
