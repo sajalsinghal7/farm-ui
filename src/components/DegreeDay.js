@@ -43,7 +43,9 @@ class DegreeDay extends Component {
           accumulatedResult += item.degreeDay;
           tempAccumulationGraphData.push({
             accumulationData: accumulatedResult,
-            date: item.date
+            date: item.date,
+            tMin: item.tMin,
+            tMax: item.tMax
           });
         }
         return accumulatedResult;
@@ -74,6 +76,9 @@ class DegreeDay extends Component {
         
         return response.json();
       }).then(body => {
+        body.sort(function(a, b) {
+          return a.date - b.date;
+        });
         this.setState({
           apiResponse: body
         });
@@ -113,13 +118,17 @@ class DegreeDay extends Component {
         <input type="submit" value="Calculate Accumulated Degree Day" />
         </div>
       </form>
+      <br></br>
+      <br></br>
       <div>
         Your Accumulated Degree Day ==> {this.state.accumulatedDegreeDay}
       </div>
 
+      <br></br>
+      <br></br>
         <LineChart
-          width={500}
-          height={300}
+          width={1500}
+          height={600}
           data={this.state.apiResponse}
           margin={{
             top: 5,
@@ -133,16 +142,18 @@ class DegreeDay extends Component {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="tMax" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="tMin" stroke="#aaaaaa" activeDot={{ r: 8 }} />
+          {/* <Line type="monotone" dataKey="tMax" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="tMin" stroke="#aaaaaa" activeDot={{ r: 8 }} /> */}
           <Line type="monotone" dataKey="degreeDay" stroke="#82ca9d" />
-          <Line type="monotone" dataKey="tMedium" stroke="#82ca9d" />
+          {/* <Line type="monotone" dataKey="tMedium" stroke="#82ca9d" /> */}
         </LineChart>
 
+        <br></br>
+      <br></br>
         
         <LineChart
-          width={500}
-          height={300}
+          width={1500}
+          height={600}
           data={this.state.accumulatedDegreeDayGraphData}
           margin={{
             top: 5,
@@ -157,11 +168,13 @@ class DegreeDay extends Component {
           <Tooltip />
           <Legend />
           <Line type="monotone" dataKey="accumulationData" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="tMax" stroke="#aaaaaa" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="tMin" stroke="#bbbbbb" activeDot={{ r: 8 }} />
         </LineChart>
 
 
 
-      <div style={{ maxWidth: '50%' }}>
+      <div style={{ maxWidth: '95%' }}>
         <MaterialTable
           columns={[
             { title: 'Id', field: 'id' },
