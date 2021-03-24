@@ -12,6 +12,7 @@ class DegreeDay extends Component {
       degreeDayFrom: '',
       degreeDayTo: '',
       accumulatedDegreeDay: 0,
+      accumulatedDegreeDayGraphData: [],
       apiResponse: [
         {
           id: 1,
@@ -94,6 +95,7 @@ class DegreeDay extends Component {
 
   calculateAccumulatedDegreeDay = (event) => {
     this.setState({[event.target.name]: event.target.value});
+    // this.setState({accumulatedDegreeDayGraphData: []});
     var from = this.state.degreeDayFrom;
     var to = this.state.degreeDayTo;
     if(from !== '') {
@@ -106,13 +108,19 @@ class DegreeDay extends Component {
     }
     if(from !== '' && to !== '') {
       var accumulatedResult = 0;
+      var tempAccumulationGraphData = []
       this.state.apiResponse.map(item => {
         if(item.date >= from && item.date <= to) {
           accumulatedResult += item.degreeDay;
+          tempAccumulationGraphData.push({
+            accumulationData: accumulatedResult,
+            date: item.date
+          });
         }
         return accumulatedResult;
       });
       this.setState({accumulatedDegreeDay: accumulatedResult});
+      this.setState({accumulatedDegreeDayGraphData: tempAccumulationGraphData})
     }
     event.preventDefault();
   }
@@ -177,7 +185,7 @@ class DegreeDay extends Component {
         </div>
       </form>
       <div>
-        {this.state.accumulatedDegreeDay}
+        Your Accumulated Degree Day ==> {this.state.accumulatedDegreeDay}
       </div>
 
         <LineChart
@@ -201,6 +209,29 @@ class DegreeDay extends Component {
           <Line type="monotone" dataKey="degreeDay" stroke="#82ca9d" />
           <Line type="monotone" dataKey="tMedium" stroke="#82ca9d" />
         </LineChart>
+
+        
+        <LineChart
+          width={500}
+          height={300}
+          data={this.state.accumulatedDegreeDayGraphData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="accumulationData" stroke="#8884d8" activeDot={{ r: 8 }} />
+        </LineChart>
+
+
+
       <div style={{ maxWidth: '50%' }}>
         <MaterialTable
           columns={[
