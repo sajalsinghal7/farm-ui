@@ -164,12 +164,14 @@ class DegreeDay extends Component {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis yAxisId="left" />
+          <YAxis yAxisId="right" orientation="right" />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="accumulationData" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="tMax" stroke="#aaaaaa" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="tMin" stroke="#bbbbbb" activeDot={{ r: 8 }} />
+          <Line  yAxisId="left" type="monotone" dataKey="accumulationData" stroke="#8884d8" activeDot={{ r: 8 }} />
+          <Line  yAxisId="left" type="monotone" dataKey="tMax" stroke="#aaaaaa" activeDot={{ r: 8 }} />
+          <Line  yAxisId="left" type="monotone" dataKey="tMin" stroke="#bbbbbb" activeDot={{ r: 8 }} />
+          <Line yAxisId="right" type="monotone" dataKey="accumulationData" stroke="#dddddd" activeDot={{ r: 8 }} />
         </LineChart>
 
 

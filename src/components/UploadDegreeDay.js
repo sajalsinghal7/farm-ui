@@ -64,12 +64,12 @@ class UploadDegreeDay extends Component {
         <br></br>
         <label>
             delimitter:-
-            <input type="text" value={this.state.delimitter} name="delimitter" onChange={this.calculateAccumulatedDegreeDay} />
+            <input type="text" value={this.state.delimitter} name="delimitter" onChange={this.handleChange} />
           </label>
         <br></br>
           <label>
             Region:-
-            <input type="text" value={this.state.region} name="degreeDayTo" onChange={this.calculateAccumulatedDegreeDay} />
+            <input type="text" value={this.state.region} name="region" onChange={this.handleChange} />
           </label>
           <br></br>
         <input type="submit" value="Submit" />
