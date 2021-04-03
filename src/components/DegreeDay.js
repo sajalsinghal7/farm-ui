@@ -98,7 +98,7 @@ class DegreeDay extends Component {
           <form onSubmit={this.handleSubmit}>
         <label>
           Name:
-          <input type="text" value={this.state.region} name="regionOfAnalysis" onChange={this.handleChange} />
+          <input type="text" value={this.state.region} name="region" onChange={this.handleChange} />
         </label>
 
         <input type="submit" value="Submit" />
