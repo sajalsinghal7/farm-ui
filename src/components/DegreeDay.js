@@ -35,12 +35,24 @@ class DegreeDay extends Component {
       to = to.replace('-', '').replace('-', '');
       to = parseInt(to)
     }
+    // oldTMin1 oldTMin2 oldTMin3 Cuttent
+    var oldTMin1 = 0.3;
+    var oldTMin2 = 0.3;
+    var oldTMin3 = 0.3;
     if(from !== '' && to !== '') {
       var accumulatedResult = 0;
       var tempAccumulationGraphData = []
       this.state.apiResponse.map(item => {
         if(item.date >= from && item.date <= to) {
-          accumulatedResult += item.degreeDay;
+          if(oldTMin1 <= 0.2 && oldTMin2<=0.2 && oldTMin3<=0.3) {
+            accumulatedResult = 0;
+          }
+          else {
+            accumulatedResult += item.degreeDay;
+          }
+          oldTMin1 = oldTMin2;
+          oldTMin2 = oldTMin3;
+          oldTMin3 = item.tMin;
           tempAccumulationGraphData.push({
             accumulationData: accumulatedResult,
             date: item.date,

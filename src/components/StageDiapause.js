@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MaterialTable from 'material-table'
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-class Diapause extends Component {
+class StageDiapause extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -11,6 +11,7 @@ class Diapause extends Component {
       from: new Date(),
       degreeDayFrom: '',
       degreeDayTo: '',
+      stages: [],
       accumulatedDegreeDay: 0,
       accumulatedDegreeDayGraphData: [],
       apiResponse: [],
@@ -83,8 +84,180 @@ class Diapause extends Component {
         })
       })
       this.setState({diapauseDataset: tempDiapauseData})
+      var stagesForAccumulatedDegreeDay = this.calaculateStages(accumulatedResult);
+      this.setState({stages: stagesForAccumulatedDegreeDay})
     }
     event.preventDefault();
+  }
+
+  calaculateStages = (accumulatedResult) => {
+    var resultantStages = [];
+    if(accumulatedResult>=121 && accumulatedResult<=198) {
+      resultantStages.push("GENERATION_1_PUPA_INITIATION");
+    }
+    if(accumulatedResult>=199 && accumulatedResult<=292) {
+      resultantStages.push("GENERATION_1_PUPA_50%");
+    }
+    if(accumulatedResult>=293 && accumulatedResult<=315) {
+      resultantStages.push("GENERATION_1_PUPA_95%");
+    }
+    if(accumulatedResult>=216 && accumulatedResult<=315) {
+      resultantStages.push("GENERATION_1_ADULT_MOTH_INITIATION");
+    }
+    if(accumulatedResult>=316 && accumulatedResult<=403) {
+      resultantStages.push("GENERATION_1_ADULT_MOTH_50%");
+    }
+    if(accumulatedResult>=404 && accumulatedResult<=481) {
+      resultantStages.push("GENERATION_1_ADULT_MOTH_95%");
+    }
+    if(accumulatedResult>=288 && accumulatedResult<=392) {
+      resultantStages.push("GENERATION_1_FLIGHT_AND_MATING_INITIATION");
+    }
+    if(accumulatedResult>=393 && accumulatedResult<=481) {
+      resultantStages.push("GENERATION_1_FLIGHT_AND_MATING_50%");
+    }
+    if(accumulatedResult>=482 && accumulatedResult<=531) {
+      resultantStages.push("GENERATION_1_FLIGHT_AND_MATING_95%");
+    }
+    if(accumulatedResult>=321 && accumulatedResult<=453) {
+      resultantStages.push("GENERATION_1_EGG_LAYING_INITIATION");
+    }
+    if(accumulatedResult>=454 && accumulatedResult<=531) {
+      resultantStages.push("GENERATION_1_EGG_LAYING_50%");
+    }
+    if(accumulatedResult>=532 && accumulatedResult<=588) {
+      resultantStages.push("GENERATION_1_EGG_LAYING_95%");
+    }
+    if(accumulatedResult>=388 && accumulatedResult<=515) {
+      resultantStages.push("GENERATION_1_1ST_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=516 && accumulatedResult<=587) {
+      resultantStages.push("GENERATION_1_1ST_INSTAR_50%");
+    }
+    if(accumulatedResult>=588 && accumulatedResult<=598) {
+      resultantStages.push("GENERATION_1_1ST_INSTAR_95%");
+    }
+    if(accumulatedResult>=447 && accumulatedResult<=598) {
+      resultantStages.push("GENERATION_1_2ND_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=599 && accumulatedResult<=653) {
+      resultantStages.push("GENERATION_1_2ND_INSTAR_50%");
+    }
+    if(accumulatedResult>=654 && accumulatedResult<=676) {
+      resultantStages.push("GENERATION_1_2ND_INSTAR_95%");
+    }
+    if(accumulatedResult>=512 && accumulatedResult<=676) {
+      resultantStages.push("GENERATION_1_3RD_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=677 && accumulatedResult<=731) {
+      resultantStages.push("GENERATION_1_3RD_INSTAR_50%");
+    }
+    if(accumulatedResult>=732 && accumulatedResult<=753) {
+      resultantStages.push("GENERATION_1_2ND_INSTAR_95%");
+    }
+    if(accumulatedResult>=585 && accumulatedResult<=753) {
+      resultantStages.push("GENERATION_1_4TH_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=754 && accumulatedResult<=809) {
+      resultantStages.push("GENERATION_1_4TH_INSTAR_50%");
+    }
+    if(accumulatedResult>=810 && accumulatedResult<=826) {
+      resultantStages.push("GENERATION_1_4TH_INSTAR_95%");
+    }
+    if(accumulatedResult>=710 && accumulatedResult<=826) {
+      resultantStages.push("GENERATION_1_5TH_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=827 && accumulatedResult<=881) {
+      resultantStages.push("GENERATION_1_5TH_INSTAR_50%");
+    }
+    if(accumulatedResult>=882 && accumulatedResult<=942) {
+      resultantStages.push("GENERATION_1_5TH_INSTAR_95%");
+    }
+
+
+    
+    if(accumulatedResult>=782 && accumulatedResult<=881) {
+      resultantStages.push("GENERATION_2_PUPA_INITIATION");
+    }
+    if(accumulatedResult>=882 && accumulatedResult<=942) {
+      resultantStages.push("GENERATION_2_PUPA_50%");
+    }
+    if(accumulatedResult>=943 && accumulatedResult<=970) {
+      resultantStages.push("GENERATION_2_PUPA_95%");
+    }
+    if(accumulatedResult>=882 && accumulatedResult<=970) {
+      resultantStages.push("GENERATION_2_ADULT_MOTH_INITIATION");
+    }
+    if(accumulatedResult>=971 && accumulatedResult<=1059) {
+      resultantStages.push("GENERATION_2_ADULT_MOTH_50%");
+    }
+    if(accumulatedResult>=1060 && accumulatedResult<=1065) {
+      resultantStages.push("GENERATION_2_ADULT_MOTH_95%");
+    }
+    if(accumulatedResult>=904 && accumulatedResult<=1065) {
+      resultantStages.push("GENERATION_2_FLIGHT_AND_MATING_INITIATION");
+    }
+    if(accumulatedResult>=1066 && accumulatedResult<=1198) {
+      resultantStages.push("GENERATION_2_FLIGHT_AND_MATING_50%");
+    }
+    if(accumulatedResult>=1199 && accumulatedResult<=1292) {
+      resultantStages.push("GENERATION_2_FLIGHT_AND_MATING_95%");
+    }
+    if(accumulatedResult>=949 && accumulatedResult<=1153) {
+      resultantStages.push("GENERATION_2_EGG_LAYING_INITIATION");
+    }
+    if(accumulatedResult>=1154 && accumulatedResult<=1292) {
+      resultantStages.push("GENERATION_2_EGG_LAYING_50%");
+    }
+    if(accumulatedResult>=1293 && accumulatedResult<=1365) {
+      resultantStages.push("GENERATION_2_EGG_LAYING_95%");
+    }
+    if(accumulatedResult>=1050 && accumulatedResult<=1231) {
+      resultantStages.push("GENERATION_2_1ST_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=1232 && accumulatedResult<=1365) {
+      resultantStages.push("GENERATION_2_1ST_INSTAR_50%");
+    }
+    if(accumulatedResult>=1366 && accumulatedResult<=1420) {
+      resultantStages.push("GENERATION_2_1ST_INSTAR_95%");
+    }
+    if(accumulatedResult>=1109 && accumulatedResult<=1298) {
+      resultantStages.push("GENERATION_2_2ND_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=1299 && accumulatedResult<=1420) {
+      resultantStages.push("GENERATION_2_2ND_INSTAR_50%");
+    }
+    if(accumulatedResult>=1421 && accumulatedResult<=1492) {
+      resultantStages.push("GENERATION_2_2ND_INSTAR_95%");
+    }
+    if(accumulatedResult>=1174 && accumulatedResult<=1370) {
+      resultantStages.push("GENERATION_2_3RD_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=1371 && accumulatedResult<=1492) {
+      resultantStages.push("GENERATION_2_3RD_INSTAR_50%");
+    }
+    if(accumulatedResult>=1493 && accumulatedResult<=1559) {
+      resultantStages.push("GENERATION_2_3RD_INSTAR_95%");
+    }
+    if(accumulatedResult>=1247 && accumulatedResult<=1442) {
+      resultantStages.push("GENERATION_2_4TH_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=1443 && accumulatedResult<=1559) {
+      resultantStages.push("GENERATION_2_4TH_INSTAR_50%");
+    }
+    if(accumulatedResult>=1560 && accumulatedResult<=1609) {
+      resultantStages.push("GENERATION_2_4TH_INSTAR_95%");
+    }
+    if(accumulatedResult>=1372 && accumulatedResult<=1609) {
+      resultantStages.push("GENERATION_2_5TH_INSTAR_INITIATION");
+    }
+    if(accumulatedResult>=1610 && accumulatedResult<=1926) {
+      resultantStages.push("GENERATION_2_5TH_INSTAR_50%");
+    }
+    if(accumulatedResult>=1927 && accumulatedResult<=1930) {
+      resultantStages.push("GENERATION_2_5TH_INSTAR_95%");
+    }
+    return resultantStages;
   }
 
   calculateDiapause = (item) => {
@@ -184,7 +357,7 @@ class Diapause extends Component {
   render() {
     return (
         <div>
-          <h2>Diapause</h2>
+          <h2>State and Diapause</h2>
           <form onSubmit={this.handleSubmit}>
         <label>
           Name:
@@ -197,11 +370,11 @@ class Diapause extends Component {
       <form onSubmit={this.calculateAccumulatedDegreeDay}>
         <div>
           <label>
-            From Date:
+            Start Date for analysis:
             <input type="Date" value={this.state.degreeDayFrom} name="degreeDayFrom" onChange={this.calculateAccumulatedDegreeDay} />
           </label>
           <label>
-            to Date:
+            Reference Date for which analysis:
             <input type="Date" value={this.state.degreeDayTo} name="degreeDayTo" onChange={this.calculateAccumulatedDegreeDay} />
           </label>
           
@@ -236,6 +409,13 @@ class Diapause extends Component {
         </LineChart> */}
 
         <br></br>
+        <div>
+          The stages for the reference date are - 
+          <br/>
+          {this.state.stages.map(data => {
+            return <li>{data}</li>;
+          })}
+        </div>
       <br></br>
         
         <LineChart
@@ -258,6 +438,32 @@ class Diapause extends Component {
           <Line type="monotone" dataKey="dayLength" stroke="#008000" activeDot={{ r: 8 }} />
           <Line type="monotone" dataKey="tMean" stroke="#FF8C00" activeDot={{ r: 8 }} />
           {/* <Line type="monotone" dataKey="accumulationData" stroke="#0000FF" activeDot={{ r: 8 }} /> */}
+          {/* <Line type="monotone" dataKey="tMax" stroke="#aaaaaa" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="tMin" stroke="#bbbbbb" activeDot={{ r: 8 }} /> */}
+        </LineChart>
+
+
+
+        <LineChart
+          width={1500}
+          height={600}
+          data={this.state.diapauseDataset}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="day" />
+          <YAxis/>
+          <Tooltip />
+          <Legend />
+          {/* <Line type="monotone" dataKey="diapauseData" stroke="#FF0000" activeDot={{ r: 8 }}/>
+          <Line type="monotone" dataKey="dayLength" stroke="#008000" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="tMean" stroke="#FF8C00" activeDot={{ r: 8 }} /> */}
+          <Line type="monotone" dataKey="accumulationData" stroke="#0000FF" activeDot={{ r: 8 }} />
           {/* <Line type="monotone" dataKey="tMax" stroke="#aaaaaa" activeDot={{ r: 8 }} />
           <Line type="monotone" dataKey="tMin" stroke="#bbbbbb" activeDot={{ r: 8 }} /> */}
         </LineChart>
@@ -286,4 +492,4 @@ class Diapause extends Component {
   }
 }
 
-export default Diapause;
+export default StageDiapause;
