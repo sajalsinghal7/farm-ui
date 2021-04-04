@@ -48,7 +48,10 @@ class DegreeDay extends Component {
             accumulatedResult = 0;
           }
           else {
-            accumulatedResult += item.degreeDay;
+            if(item.tMax<32)
+             {
+               accumulatedResult += item.degreeDay;
+              }
           }
           oldTMin1 = oldTMin2;
           oldTMin2 = oldTMin3;

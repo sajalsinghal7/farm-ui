@@ -51,7 +51,10 @@ class Diapause extends Component {
             accumulatedResult = 0;
           }
           else {
-            accumulatedResult += item.degreeDay;
+            if(item.tMax<32)
+             {
+               accumulatedResult += item.degreeDay;
+              }
           }
           oldTMin1 = oldTMin2;
           oldTMin2 = oldTMin3;
@@ -250,7 +253,7 @@ class Diapause extends Component {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
+          <XAxis dataKey="date" />
           <YAxis/>
           <Tooltip />
           <Legend />
