@@ -6,6 +6,7 @@ import UploadDegreeDay from './components/UploadDegreeDay';
 import DayLength from './components/DayLength';
 import Diapause from './components/Diapause';
 import StageDiapause from './components/StageDiapause';
+import Stress from './components/Stress';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <li><Link to={'/dayLength'} className="nav-link">Day Length Viewer</Link></li>
             <li><Link to={'/diapause'} className="nav-link">Diapause Analysis</Link></li>
             <li><Link to={'/stageDiapause'} className="nav-link">Stage-Diapause Analysis</Link></li>
+            <li><Link to={'/stress'} className="nav-link">Stress Analysis</Link></li>
           </ul>
           </nav>
           <hr />
@@ -31,6 +33,7 @@ class App extends Component {
               <Route path='/dayLength' component={DayLength} />
               <Route path='/diapause' component={Diapause} />
               <Route path='/stageDiapause' component={StageDiapause} />
+              <Route path='/stress' component={Stress} />
           </Switch>
         </div>
       </Router>
